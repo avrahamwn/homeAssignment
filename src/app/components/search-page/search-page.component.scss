@@ -1,0 +1,35 @@
+.component{
+    // background: linear-gradient(to bottom, rgb(59, 7, 156), rgb(55, 10, 139),  rgb(66, 8, 104));
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    // color: white;
+
+    .component__title{
+        font-size: 3rem;
+        height: 30%;
+        margin-top: 5rem;
+    }
+
+    .component__search-bar{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .search-bar__label{
+            font-size: 2rem;
+        }
+        .search-bar__input{
+           width: 90%;
+            border-bottom: 1px solid darkgray;
+            margin-top: 5rem;
+            font-size: 2rem;
+            padding: 8px;
+        }
+        .serach-bar__result{
+          display: block;
+          border-bottom: solid 1px blue;
+        }
+    }
+}
