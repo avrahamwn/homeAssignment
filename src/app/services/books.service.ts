@@ -12,11 +12,11 @@ export class BooksService {
 
 
 
-  searchBook(keyWords:string):Observable<any>{
+  searchBook(keyWords:string, startIndex:number = 0):Observable<any>{
     if(!keyWords) return of(false);
 
     keyWords = keyWords.split(' ').join('+');
-    let ApiAddress = 'https://www.googleapis.com/books/v1/volumes?maxResults=20&q=' + keyWords;
+    let ApiAddress = 'https://www.googleapis.com/books/v1/volumes?maxResults=20&q=' + keyWords + '&startIndex=' + startIndex;
 
     return this.http.get(ApiAddress).pipe(
       catchError((err: HttpErrorResponse) => {
