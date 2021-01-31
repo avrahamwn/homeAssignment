@@ -38,7 +38,11 @@ export class SearchPageComponent implements OnInit {
 
   onInput(event){
     this.textSearched = event.target.value;
+    console.log(this.textSearched);
+
     this.booksService.searchBook(this.textSearched).subscribe(totalItems => {
+      console.log(totalItems);
+
       this.totalItems = totalItems;
     })
   }

@@ -27,7 +27,10 @@ export class BooksService {
   }
 
   searchBook(keyWords: string, startIndex: number = 0): Observable<any> {
-    if (!keyWords) return of({ items: [] });
+    if (!keyWords){
+      this.bookList$.next([]);
+      return of(0);
+    }
 
     keyWords = keyWords.split(' ').join('+');
     const ApiAddress = 'https://www.googleapis.com/books/v1/volumes?maxResults=20&q=' + keyWords + '&startIndex=' + startIndex;
@@ -35,8 +38,8 @@ export class BooksService {
     return this.http.get(ApiAddress).pipe(
       catchError((err: HttpErrorResponse) => {
         console.error(err);
-        this.messagesService.addSingle('error', 'An Error has occurred', 'An Error has occurred during your request process. please try again')
-        return of({ items: [] });
+        this.messagesService.addMessage('error', 'An Error has occurred', 'An Error has occurred during your request process. please try again')
+        return of({totalItems:0, items: [] });
       }),
       tap((result: { totalItems: number, items: any[] }) => {
         console.log(result);
@@ -55,7 +58,7 @@ export class BooksService {
     this.wishList.push(book);
     this.localStorageService.setWishListInLocalStorage(this.wishList);
     console.log('wishList:\n', this.wishList);
-    this.messagesService.addSingle('success', 'Item added successfuly!', 'The book was successfuly added to your Wish List')
+    this.messagesService.addMessage('success', 'Item added successfuly!', 'The book was successfuly added to your Wish List')
 
   }
 
@@ -63,7 +66,7 @@ export class BooksService {
     const bookIndex = this.wishList.findIndex(exsitedBook => book.id == exsitedBook.id);
     this.wishList.splice(bookIndex, 1);
     this.localStorageService.setWishListInLocalStorage(this.wishList);
-    this.messagesService.addSingle('success', 'Item removed successfuly!', 'The book was successfuly removed to your Wish List')
+    this.messagesService.addMessage('success', 'Item removed successfuly!', 'The book was successfuly removed to your Wish List')
     console.log('wishList:\n', this.wishList);
 
   }

@@ -8,7 +8,7 @@ export class MessagesService {
 
   constructor(private messageService: MessageService) {}
 
-  addSingle(severity: 'success' | 'error', summary: string, detail: string) {
+  addMessage(severity: 'success' | 'error', summary: string, detail: string) {
       this.messageService.add({severity:severity, summary:summary, detail:detail});
   }
 

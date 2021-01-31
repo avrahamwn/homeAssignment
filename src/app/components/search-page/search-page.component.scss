@@ -7,8 +7,8 @@
   color: rgb(84, 127, 177);
   padding: 5rem 5rem 5rem 5rem;
 
-  .component__wish-link{
-    color:rgb(6, 128, 243);
+  .component__wish-link {
+    color: rgb(6, 128, 243);
     align-self: start;
     display: flex;
     flex-direction: row;
@@ -16,28 +16,30 @@
     outline: none;
     border: none;
     cursor: pointer;
-    .wish-link__icon{
-       font-size: 5rem;
+    .wish-link__icon {
+      font-size: 5rem;
     }
-    .wish-link__text{
+    .wish-link__text {
       font-size: 1.1rem;
       width: 5.8rem;
       margin-left: 10px;
-
+      text-align: start;
     }
-
   }
 
   .component__title {
     font-size: 4rem;
     min-height: 15rem;
+    margin-top: 2rem;
     font-weight: bold;
+    text-align: center;
   }
 
   .component__search-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
     .search-bar__label {
       font-size: 2rem;
@@ -61,7 +63,7 @@
       align-items: center;
       flex-direction: column;
       font-size: 1.5rem;
-
+      text-align: center;
 
       .results__item {
         border: 1px solid rgb(142, 163, 189);
@@ -71,7 +73,7 @@
         background-color: rgb(209, 222, 238);
         min-width: 70%;
         max-width: 70%;
-
+        text-align: start;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -86,24 +88,21 @@
         }
 
         .item__wish {
-
           font-size: 2rem;
           margin-left: 20px;
-
         }
       }
-      .results__item:hover{
+      .results__item:hover {
         background-color: rgb(178, 207, 240);
       }
     }
   }
 }
-:host::ng-deep{
+:host::ng-deep {
   .p-paginator {
     background-color: transparent;
   }
-  .p-highlight{
+  .p-highlight {
     background-color: white !important;
   }
 }
-
