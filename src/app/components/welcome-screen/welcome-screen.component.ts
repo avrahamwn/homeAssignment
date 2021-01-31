@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../../services/local-storage.service';
 import { Component, OnInit, ɵɵInheritDefinitionFeature } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class WelcomeScreenComponent implements OnInit {
 usernameFormControl: FormControl;
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.initForm();
@@ -22,6 +23,7 @@ usernameFormControl: FormControl;
 
   onSubmit(){
     console.log(this.usernameFormControl.value);
+    this.localStorageService.setUserNameInLocalStorage(this.usernameFormControl.value)
     this.router.navigate(['search-page']);
   }
 

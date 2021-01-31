@@ -1,8 +1,12 @@
+import { DialogService } from 'src/app/services/dialog.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BooksService } from '../../services/books.service';
 import { concatMap, delay, map, skipWhile, tap } from 'rxjs/operators'
-import { PaginationEvent } from 'src/app/interfaces/pagination-event';
+import { IPaginationEvent } from 'src/app/interfaces/pagination-event';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IBook } from 'src/app/interfaces/book';
 
 @Component({
   selector: 'app-search-page',
@@ -10,60 +14,50 @@ import { PaginationEvent } from 'src/app/interfaces/pagination-event';
   styleUrls: ['./search-page.component.scss']
 })
 export class SearchPageComponent implements OnInit {
-  userName: string = 'username';
-  searchControl: FormControl = new FormControl();
-  booksList;
-  totalItems: number;
+  userName: string;
 
-  constructor(private booksService: BooksService) { }
+  booksList$: Observable<IBook[]>;
+  totalItems: number;
+  textSearched : string;
+
+
+  constructor(private booksService: BooksService, private router: Router, private dialogService: DialogService) { }
 
   ngOnInit() {
-    this.initControlAndBookList()
+    this.initUserName();
+    this.initBookList();
   }
 
-
-
-  initControlAndBookList() {
-    this.searchControl.valueChanges.pipe(
-      skipWhile(textTosearch => {
-        return !textTosearch
-      }),
-      concatMap((textToSearch: string) => {
-        return this.booksService.searchBook(textToSearch);
-      }),
-      skipWhile(textTosearch => {
-        return !textTosearch
-      }),
-      tap(results => {
-        console.log(results);
-        this.totalItems = results.totalItems;
-      }),
-      map(results => {
-        return results.items;
-      })
-    ).subscribe(results => {
-      this.booksList = results;
-    });
+  initUserName(){
+    this.userName = localStorage['userName']
   }
 
-  onPageChange(event: PaginationEvent){
-    console.log(event);
-    let textToSearch = this.searchControl.value;
-    this.booksService.searchBook(textToSearch, event.first).pipe(tap(console.log),
-    map(results => {
-      return results.items;
+  initBookList(){
+    this.booksList$ = this.booksService.getBookList();
+  }
+
+  onInput(event){
+    this.textSearched = event.target.value;
+    this.booksService.searchBook(this.textSearched).subscribe(totalItems => {
+      this.totalItems = totalItems;
     })
-    ).subscribe(results => {
-      this.booksList = results;
-    });
+  }
+
+  onPageChange(event: IPaginationEvent){
+    this.booksService.searchBook(this.textSearched, event.first).subscribe();
+  }
+
+  onItemClicked(currentBook:IBook){
+    console.log('onItemClicked');
+    this.dialogService.setDisplay(true);
+    this.dialogService.setCurrentBook(currentBook)
+
 
   }
 
-  onWishIconClicked(){
-
-  }
-  onCheckedhIconClicked(){
-
+  onWishIconClicked(book: IBook){
+    book.wished = !book.wished;
+    book.wished ? this.booksService.addBookToWishList(book) : this.booksService.removeBookFromWishList(book);
   }
 
 }

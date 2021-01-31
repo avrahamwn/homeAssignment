@@ -1,0 +1,35 @@
+<div class="component">
+  <div class="component__search-link" [routerLink]="['/search-page']">
+    <i class="search-link__icon pi pi-search"></i>
+    <div class="search-link__text">Go to search books
+      <i class="pi pi-arrow-right"></i>
+    </div>
+  </div>
+  <div class="component__title">
+    Hi {{userName}}, Here is your books WishList
+  </div>
+  <div class="component__sub-title">
+    Click on the icon to remove a book from your list
+  </div>
+
+  <div *ngIf="!wishList[0]" class="component__message">
+    Your wish list is currently empty. You can always add new items to your list from the <a [routerLink]="['/search-page']">Search Page</a>
+  </div>
+
+  <div class="component__list">
+    <div class="list__item" *ngFor="let book of wishList" (click)="onItemClicked(book)">
+      <div class="item__content" >
+        <div class="content__title">
+          {{book.title}}
+
+        </div>
+        <div class="content__authors">
+          {{book.authors ? 'by ' + book.authors[0] : 'author name unspecified'}}
+        </div>
+      </div>
+      <i class="item__wish pi pi-times" (click)="onRemovehIconClicked(book);$event.stopPropagation()"></i>
+
+    </div>
+  </div>
+
+</div>

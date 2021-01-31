@@ -1,34 +1,44 @@
 <div class="component">
-    <div class="component__title">welcome {{ userName }}!</div>
+
+  <div class="component__wish-link" [routerLink]="['/wish-list']">
+    <i class="wish-link__icon pi pi-arrow-right"></i>
+    <div class="wish-link__text">Go to your books WishList
+      <i class="pi pi-heart"></i>
+    </div>
+  </div>
+    <div class="component__title">Welcome {{ userName }}!</div>
 
     <div class="component__search-bar">
         <div class="search-bar__label">
             please enter here the name of the book you'd like to search for
         </div>
-        <input class="search-bar__input" placeholder="e.g. Uncle Tom's Cabin..." [formControl]="searchControl" />
+        <input class="search-bar__input" placeholder="e.g. Uncle Tom's Cabin..." (input)="onInput($event)"/>
         <div class="search-bar__results" *ngIf="totalItems">
           <p-paginator
           [rows]="20"
           [totalRecords]="totalItems"
           (onPageChange)="onPageChange($event)"
           class="p-paginator"
-          style="font-size: 2rem"
+
           ></p-paginator>
-            <div class="results__item" *ngFor="let book of booksList ">
-              <div class="item__content">
+          Click on each item to see more details; Click on the icon to add or remove item from your Wish List
+            <div class="results__item" *ngFor="let book of booksList$ | async" (click)="onItemClicked(book)">
+
+              <div class="item__content" >
                 <div class="content__title">
-                  {{book.volumeInfo.title}}
+                  {{book.title}}
 
               </div>
               <div class="content__authors">
-                  {{book.volumeInfo.authors ? 'by ' + book.volumeInfo.authors[0] : 'author name unspecified'}}
+                  {{book.authors ? 'by ' + book.authors[0] : 'author name unspecified'}}
               </div>
               </div>
 
-                <i class="item__wish pi pi-heart" (click)="onWishIconClicked()"></i>
-                <i class="item__wish pi pi-heart" (click)="onCheckedhIconClicked()"></i>
+                <i class="item__wish pi" (click)="onWishIconClicked(book);$event.stopPropagation()" [ngClass]="book.wished ? 'pi-check' : 'pi-heart' "></i>
 
             </div>
+
+
 
         </div>
     </div>

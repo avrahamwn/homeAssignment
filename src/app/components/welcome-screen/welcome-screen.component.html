@@ -17,7 +17,7 @@
   <div class="component__login">
     <div class="login__label">please insert your username</div>
     <input placeholder="username" [formControl]="usernameFormControl" />
-    <button (click)="onSubmit()" [disabled]="usernameFormControl.invalid">Find your book!</button>
+    <button (click)="onSubmit()" [disabled]="usernameFormControl.invalid" [ngClass]="{'button--disabled': usernameFormControl.invalid}">Find your book!</button>
   </div>
 
 </div>

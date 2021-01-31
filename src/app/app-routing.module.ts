@@ -1,3 +1,4 @@
+import { WishListComponent } from './components/wish-list/wish-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchPageComponent } from './components/search-page/search-page.component';
@@ -15,7 +16,11 @@ const routes: Routes = [
   },
   {
     path: 'search-page',
-    component:SearchPageComponent
+    component: SearchPageComponent
+  },
+  {
+    path: 'wish-list',
+    component: WishListComponent
   }
 ];
 

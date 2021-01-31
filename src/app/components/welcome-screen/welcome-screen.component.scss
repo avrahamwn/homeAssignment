@@ -1,14 +1,14 @@
 .component{
     background: linear-gradient(to bottom, rgb(59, 7, 156), rgb(55, 10, 139),  rgb(66, 8, 104));
     height: 100%;
-    width: 100%;    
+    width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
     text-align: center;
     color: white;
 
-    .component__title{       
+    .component__title{
         height: 50%;
         font-size: 5rem;
 
@@ -18,7 +18,7 @@
     }
 
     .component__login{
-    
+
         height: 15%;
         display: flex;
         flex-direction: column;
@@ -30,9 +30,8 @@
 
 
         input{
-            
             border-radius: 7px;
-            height: 2rem;
+            height: 4rem;
             padding: 10px;
             width: 100%;
             font-size: 1.5rem;
@@ -43,9 +42,12 @@
             outline: none;
             border-radius: 7px;
             padding: 15px;
-            background-color: rgb(89, 118, 172);
+            background-color: rgb(141, 20, 131);
             color: white;
             font-size: 2rem;
+        }
+        .button--disabled{
+          background-color: rgb(89, 118, 172);
         }
     }
 }

@@ -1,0 +1,33 @@
+<div *ngIf="currentBook$ |async as currentBook">
+  <p-dialog [header]="currentBook.title" [(visible)]="showBookDetails">
+    <div class="field label">
+      {{currentBook.subtitle ? currentBook.subtitle : 'no subtitle'}}
+    </div>
+
+    <div class="field">{{currentBook.authors ? 'by ' + currentBook.authors[0] : 'author name unspecified'}}</div>
+
+    <div class="field">
+      <div class="label">Publisher:</div>
+
+      <div class="regular">{{currentBook.publisher ? currentBook.publisher : 'unspecified'}}</div>
+    </div>
+    <div class="field">
+      <div class="label">Year of publish:</div>
+
+      <div class="regular"> {{currentBook.publishedDate ? currentBook.publishedDate : 'unavalible'}}</div>
+    </div>
+    <div class="field">
+      <div class="label">Description:</div>
+
+      <div class="regular">{{currentBook.description ? currentBook.description : 'unavalible'}}</div>
+    </div>
+    <div class="field">
+      <div class="label">Language:</div>
+
+      <div class="regular">{{currentBook.language ? currentBook.language : 'unspecified'}}</div>
+    </div>
+
+
+  </p-dialog>
+
+</div>
