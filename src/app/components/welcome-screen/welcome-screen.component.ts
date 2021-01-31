@@ -22,7 +22,6 @@ usernameFormControl: FormControl;
   }
 
   onSubmit(){
-    console.log(this.usernameFormControl.value);
     this.localStorageService.setUserNameInLocalStorage(this.usernameFormControl.value)
     this.router.navigate(['search-page']);
   }

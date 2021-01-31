@@ -32,7 +32,6 @@ export class WishListComponent implements OnInit {
   }
 
   onItemClicked(currentBook:IBook){
-    console.log('onItemClicked');
     this.dialogService.setDisplay(true);
     this.dialogService.setCurrentBook(currentBook)
 

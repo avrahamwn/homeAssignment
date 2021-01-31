@@ -25,8 +25,6 @@ export class LocalStorageService {
   }
 
   getWishListFromLocalStorage(): IBook[] {
-    console.log(JSON.parse(localStorage.getItem('wishList')));
-
     return JSON.parse(localStorage.getItem('wishList'))  ? JSON.parse(localStorage.getItem('wishList')) : [];
   }
 

@@ -18,7 +18,7 @@ export class SearchPageComponent implements OnInit {
 
   booksList$: Observable<IBook[]>;
   totalItems: number;
-  textSearched : string;
+  textSearched: string;
 
 
   constructor(private booksService: BooksService, private router: Router, private dialogService: DialogService) { }
@@ -28,38 +28,34 @@ export class SearchPageComponent implements OnInit {
     this.initBookList();
   }
 
-  initUserName(){
+  initUserName() {
     this.userName = localStorage['userName']
   }
 
-  initBookList(){
+  initBookList() {
     this.booksList$ = this.booksService.getBookList();
   }
 
-  onInput(event){
+  onInput(event) {
     this.textSearched = event.target.value;
-    console.log(this.textSearched);
 
     this.booksService.searchBookAndGetTotalItems(this.textSearched).subscribe(totalItems => {
-      console.log(totalItems);
-
       this.totalItems = totalItems;
     })
   }
 
-  onPageChange(event: IPaginationEvent){
+  onPageChange(event: IPaginationEvent) {
     this.booksService.searchBookAndGetTotalItems(this.textSearched, event.first).subscribe();
   }
 
-  onItemClicked(currentBook:IBook){
-    console.log('onItemClicked');
+  onItemClicked(currentBook: IBook) {
     this.dialogService.setDisplay(true);
-    this.dialogService.setCurrentBook(currentBook)
+    this.dialogService.setCurrentBook(currentBook);
 
 
   }
 
-  onWishIconClicked(book: IBook){
+  onWishIconClicked(book: IBook) {
     book.wished = !book.wished;
     book.wished ? this.booksService.addBookToWishList(book) : this.booksService.removeBookFromWishList(book);
   }
