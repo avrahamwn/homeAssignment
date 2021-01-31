@@ -40,7 +40,7 @@ export class SearchPageComponent implements OnInit {
     this.textSearched = event.target.value;
     console.log(this.textSearched);
 
-    this.booksService.searchBook(this.textSearched).subscribe(totalItems => {
+    this.booksService.searchBookAndGetTotalItems(this.textSearched).subscribe(totalItems => {
       console.log(totalItems);
 
       this.totalItems = totalItems;
@@ -48,7 +48,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   onPageChange(event: IPaginationEvent){
-    this.booksService.searchBook(this.textSearched, event.first).subscribe();
+    this.booksService.searchBookAndGetTotalItems(this.textSearched, event.first).subscribe();
   }
 
   onItemClicked(currentBook:IBook){

@@ -26,7 +26,7 @@ export class BooksService {
 
   }
 
-  searchBook(keyWords: string, startIndex: number = 0): Observable<any> {
+  searchBookAndGetTotalItems(keyWords: string, startIndex: number = 0): Observable<number> {
     if (!keyWords){
       this.bookList$.next([]);
       return of(0);
